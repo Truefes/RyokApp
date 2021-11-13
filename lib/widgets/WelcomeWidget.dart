@@ -4,6 +4,7 @@ class WelcomeWidget extends StatelessWidget {
   final String? title;
   final VoidCallback? loginOnPressed;
   final VoidCallback? signupOnPressed;
+  final VoidCallback? statusOnPressed;
   final Widget? child;
   final List<Widget>? children;
   const WelcomeWidget(
@@ -12,7 +13,8 @@ class WelcomeWidget extends StatelessWidget {
       this.child,
       this.children,
       this.loginOnPressed,
-      this.signupOnPressed})
+      this.signupOnPressed, 
+      this.statusOnPressed})
       : super(key: key);
 
   @override
@@ -37,7 +39,10 @@ class WelcomeWidget extends StatelessWidget {
               ElevatedButton(
                 onPressed: signupOnPressed,
                 child: Text("sign up"),
-              )
+              ),
+              ElevatedButton(
+                onPressed: statusOnPressed,
+                child: Text("status"))
             ],
           ),
         ],

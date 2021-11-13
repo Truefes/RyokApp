@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ryok_application/widgets/status_widget.dart';
 import 'widgets/importAll.dart';
 
 void main() {
@@ -31,6 +32,8 @@ class MyApp extends StatelessWidget {
         '/register': (context) => RegisterWidget(onPressed: () {
               Navigator.pop(context);
             }),
+        '/status': (context) => status_widget(onPressed: (){Navigator.pop(context);},),
+
         // '/forgot_password': (context) => forgot_password_widget(),
         // '/reset_password': (context) => reset_password_widget(),
         // '/profile': (context) => profile_widget(),
@@ -82,6 +85,9 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               signupOnPressed: () {
                 Navigator.pushNamed(context, '/register');
+              },
+              statusOnPressed: (){
+                Navigator.pushNamed(context,'/status');
               },
             ),
           ],
