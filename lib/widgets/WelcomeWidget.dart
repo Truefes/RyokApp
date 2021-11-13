@@ -13,23 +13,26 @@ class WelcomeWidget extends StatelessWidget {
       this.child,
       this.children,
       this.loginOnPressed,
-      this.signupOnPressed, 
+      this.signupOnPressed,
       this.statusOnPressed})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String _title; //null check for title !
-    if (title == null) {
-      _title = "Welcome"; //if title is null then set it to welcome
-    } else {
-      _title = title!;
-    }
-
     return Container(
       child: Column(
         children: <Widget>[
-          Text(_title),
+          Text(
+            this.title ?? "WELCOME TO RYOK",
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.w600,
+              color: Colors.deepPurple[800],
+              decoration: TextDecoration.underline,
+            ),
+          ),
+          
+
           Column(
             children: [
               ElevatedButton(
@@ -40,9 +43,7 @@ class WelcomeWidget extends StatelessWidget {
                 onPressed: signupOnPressed,
                 child: Text("sign up"),
               ),
-              ElevatedButton(
-                onPressed: statusOnPressed,
-                child: Text("status"))
+              ElevatedButton(onPressed: statusOnPressed, child: Text("status"))
             ],
           ),
         ],
