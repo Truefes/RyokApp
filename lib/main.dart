@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:ryok_application/widgets/status_widget.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'widgets/importAll.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); //required for firebase to work
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -64,6 +70,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final Future<FirebaseApp> _initialization =
+      Firebase.initializeApp(); //required for firebase to work
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -82,10 +91,26 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            
+            //future builder to wait for firebase to initialize
+            FutureBuilder<FirebaseApp>(
+              future: _initialization,
+              builder: (context, snapshot) {
+                // return some feedback when firebase is initializing
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return Text(
+                    'Ready to go!',
+                    style: Theme.of(context).textTheme.headline4,
+                  );
+                  
+                } else {
+                  // return some feedback when firebase is not initialized
+                  return const CircularProgressIndicator();//may also indicate failed initialization
+                }
+              },
+            ),
             WelcomeWidget(
               title: 'Welcome to Ryok App ',
-              
+
               loginOnPressed: () {
                 Navigator.pushNamed(context, '/login');
               },
