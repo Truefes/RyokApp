@@ -32,7 +32,11 @@ class MyApp extends StatelessWidget {
         '/register': (context) => RegisterWidget(onPressed: () {
               Navigator.pop(context);
             }),
-        '/status': (context) => status_widget(onPressed: (){Navigator.pop(context);},),
+        '/status': (context) => status_widget(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
 
         // '/forgot_password': (context) => forgot_password_widget(),
         // '/reset_password': (context) => reset_password_widget(),
@@ -78,17 +82,19 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            
             WelcomeWidget(
               title: 'Welcome to Ryok App ',
+              
               loginOnPressed: () {
                 Navigator.pushNamed(context, '/login');
               },
               signupOnPressed: () {
                 Navigator.pushNamed(context, '/register');
               },
-              statusOnPressed: (){
-                Navigator.pushNamed(context,'/status');
-              },
+              // statusOnPressed: () {
+              //   Navigator.pushNamed(context, '/status');
+              // },
             ),
           ],
         ),
